@@ -1063,19 +1063,19 @@ mod tests {
 
         let rec = vec![DataType::Int(5), "asdfasdfasdfasdf".into(), "asdf".into()];
 
-        // DataType should always use 16 bytes itself
-        assert_eq!(size_of::<DataType>(), 16);
-        assert_eq!(size_of_val(&txt), 16);
+        // DataType should always use 24 bytes itself
+        assert_eq!(size_of::<DataType>(), 24);
+        assert_eq!(size_of_val(&txt), 24);
         assert_eq!(size_of_val(&txt) as u64, txt.size_of());
         assert_eq!(txt.deep_size_of(), txt.size_of() + 8 + 2); // DataType + ArcCStr's ptr + 2 chars
-        assert_eq!(size_of_val(&shrt), 16);
-        assert_eq!(size_of_val(&long), 16);
-        assert_eq!(size_of_val(&time), 16);
+        assert_eq!(size_of_val(&shrt), 24);
+        assert_eq!(size_of_val(&long), 24);
+        assert_eq!(size_of_val(&time), 24);
         assert_eq!(size_of_val(&time) as u64, time.size_of());
-        assert_eq!(time.deep_size_of(), 16); // DataType + inline NaiveDateTime
+        assert_eq!(time.deep_size_of(), 24); // DataType + inline NaiveDateTime
 
         assert_eq!(size_of_val(&rec), 24);
-        assert_eq!(rec.size_of(), 24 + 3 * 16);
-        assert_eq!(rec.deep_size_of(), 24 + 3 * 16 + (8 + 16));
+        assert_eq!(rec.size_of(), 24 + 3 * 24);
+        assert_eq!(rec.deep_size_of(), 24 + 3 * 24 + (8 + 16));
     }
 }
